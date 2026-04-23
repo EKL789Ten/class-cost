@@ -2,8 +2,8 @@
 
 A single-page, dependency-free tuition-per-class calculator. Enter your tuition, pick how your school charges, optionally toggle loan-adjusted cost, and download a share card.
 
-**Live preview:** `<PLACEHOLDER_PREVIEW_URL>`
-**Production:** `<PLACEHOLDER_PRODUCTION_URL>` (Cloudflare Pages)
+**GitHub Repository:** [https://github.com/EKL789Ten/class-cost](https://github.com/EKL789Ten/class-cost)
+**Live Deployment:** [https://4542adce.classcost.pages.dev](https://4542adce.classcost.pages.dev)
 
 ---
 
@@ -62,7 +62,7 @@ Open <http://localhost:8000>.
    ```
 2. Create the Pages project (one-time).
    ```bash
-   wrangler pages project create classcost --production-branch=main
+   wrangler pages project create classcost --production-branch=master
    ```
 3. Use the helper scripts:
    ```bash
