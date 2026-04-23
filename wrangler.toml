@@ -1,0 +1,14 @@
+# Cloudflare Pages project configuration
+# Replace the placeholders with your own values, then commit.
+
+name = "classcost"
+compatibility_date = "2025-04-01"
+pages_build_output_dir = "."
+
+# If you wire up a custom domain later, add it in the Cloudflare dashboard
+# or via `wrangler pages deployment tail`.
+#
+# Environment variables (never commit secrets — add them in the dashboard
+# or via `wrangler pages secret put`):
+#
+#   COLLEGE_SCORECARD_API_KEY = "<PLACEHOLDER_COLLEGE_SCORECARD_API_KEY>"

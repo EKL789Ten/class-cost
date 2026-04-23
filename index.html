@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Skipping This Class Costs You $X — Tuition-per-Class Calculator</title>
+    <meta
+      name="description"
+      content="See exactly how much one missed class costs you — with loan interest included. Free, shareable, no sign-up."
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Skipping This Class Costs You $X" />
+    <meta
+      property="og:description"
+      content="See exactly how much one missed class costs you — with loan interest included."
+    />
+    <meta property="og:image" content="/assets/og-card.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Skipping This Class Costs You $X" />
+
+    <!-- Favicon (inline SVG) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23C24B2E'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='400' text-anchor='middle' fill='%23FBF6EC'%3E%24%3C/text%3E%3C/svg%3E"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Skipping This Class Costs You $X",
+        "description": "Free tuition-per-class calculator that shows the true cost of skipping a single college class, including loan interest.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Skip link (WCAG 2.4.1) -->
+    <a href="#main" class="skip-link">Skip to calculator</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="/" class="logo" aria-label="Home — Class Cost">
+          <svg
+            class="logo__mark"
+            width="28"
+            height="28"
+            viewBox="0 0 32 32"
+            fill="none"
+            aria-hidden="true"
+          >
+            <rect width="32" height="32" rx="7" fill="currentColor" />
+            <text
+              x="16"
+              y="23"
+              font-family="Instrument Serif, Georgia, serif"
+              font-size="20"
+              text-anchor="middle"
+              fill="var(--color-bg)"
+            >
+              $
+            </text>
+          </svg>
+          <span class="logo__word">Class<em>Cost</em></span>
+        </a>
+
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          aria-label="Switch to dark mode"
+          title="Toggle theme"
+        ></button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- HERO -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="container">
+          <p class="eyebrow">A reality check, not a guilt trip</p>
+          <h1 id="hero-heading" class="hero__title">
+            Skipping this class costs you&nbsp;<span class="hero__accent">$X</span>.
+          </h1>
+          <p class="hero__lede">
+            Punch in your tuition. We'll do the math — including what that
+            skipped lecture <em>really</em> costs once your student loan has
+            finished with it.
+          </p>
+          <a href="#calculator" class="btn btn--primary hero__cta">Run the numbers</a>
+        </div>
+      </section>
+
+      <!-- CALCULATOR -->
+      <section class="calc" id="calculator" aria-labelledby="calc-heading">
+        <div class="container calc__grid">
+          <!-- Form -->
+          <form
+            class="calc__form"
+            id="calc-form"
+            novalidate
+            aria-labelledby="calc-heading"
+          >
+            <h2 id="calc-heading" class="section-title">Your numbers</h2>
+
+            <!-- School -->
+            <div class="field">
+              <label for="school">School (optional)</label>
+              <input
+                type="text"
+                id="school"
+                name="school"
+                list="school-list"
+                placeholder="e.g. Ohio State University"
+                autocomplete="off"
+                aria-describedby="school-help"
+              />
+              <p id="school-help" class="help">
+                Pick a school to auto-fill typical tuition, or leave blank and enter your own.
+              </p>
+              <datalist id="school-list"></datalist>
+            </div>
+
+            <!-- Tuition -->
+            <div class="field">
+              <label for="tuition">
+                Tuition
+                <button
+                  type="button"
+                  class="tooltip-trigger"
+                  aria-describedby="tuition-tip"
+                  aria-label="What to include in tuition"
+                >?</button>
+              </label>
+              <div class="input-with-prefix">
+                <span class="input-prefix" aria-hidden="true">$</span>
+                <input
+                  type="number"
+                  id="tuition"
+                  name="tuition"
+                  min="0"
+                  step="100"
+                  inputmode="decimal"
+                  placeholder="11000"
+                  required
+                  aria-required="true"
+                />
+              </div>
+              <p id="tuition-tip" class="help">
+                <strong>Include</strong> tuition and mandatory fees.
+                <strong>Exclude</strong> housing, food, books, and transport.
+              </p>
+            </div>
+
+            <!-- Billing mode -->
+            <fieldset class="field">
+              <legend>How does your school charge?</legend>
+              <div class="radio-group" role="radiogroup">
+                <label class="radio">
+                  <input type="radio" name="billing" value="flat" checked />
+                  <span>Flat rate per semester</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="billing" value="credit" />
+                  <span>Per credit hour</span>
+                </label>
+              </div>
+              <p class="help" id="billing-help">
+                Most full-time students pay a flat rate. Part-time is usually per credit.
+              </p>
+            </fieldset>
+
+            <!-- Per credit fields -->
+            <div class="field field--credit" hidden>
+              <label for="credits">Credits this semester</label>
+              <input
+                type="number"
+                id="credits"
+                name="credits"
+                min="1"
+                max="30"
+                step="1"
+                value="15"
+                inputmode="numeric"
+              />
+            </div>
+
+            <!-- Class schedule -->
+            <div class="field-row">
+              <div class="field">
+                <label for="class-credits">Credits for this class</label>
+                <input
+                  type="number"
+                  id="class-credits"
+                  name="classCredits"
+                  min="1"
+                  max="12"
+                  step="1"
+                  value="3"
+                  inputmode="numeric"
+                />
+              </div>
+              <div class="field">
+                <label for="meetings">Meetings per week</label>
+                <input
+                  type="number"
+                  id="meetings"
+                  name="meetings"
+                  min="1"
+                  max="7"
+                  step="1"
+                  value="3"
+                  inputmode="numeric"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="weeks">Weeks in the semester</label>
+              <input
+                type="number"
+                id="weeks"
+                name="weeks"
+                min="8"
+                max="20"
+                step="1"
+                value="15"
+                inputmode="numeric"
+              />
+            </div>
+
+            <!-- Loan toggle -->
+            <fieldset class="field loan-fieldset">
+              <legend>Paying with loans?</legend>
+              <label class="switch">
+                <input type="checkbox" id="loan-toggle" name="loanToggle" />
+                <span class="switch__slider" aria-hidden="true"></span>
+                <span class="switch__label">Show loan-adjusted cost</span>
+              </label>
+              <div class="field-row loan-fields" hidden>
+                <div class="field">
+                  <label for="rate">Interest rate</label>
+                  <div class="input-with-suffix">
+                    <input
+                      type="number"
+                      id="rate"
+                      name="rate"
+                      min="0"
+                      max="20"
+                      step="0.01"
+                      value="6.53"
+                      inputmode="decimal"
+                    />
+                    <span class="input-suffix" aria-hidden="true">%</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="term">Repayment term</label>
+                  <div class="input-with-suffix">
+                    <input
+                      type="number"
+                      id="term"
+                      name="term"
+                      min="1"
+                      max="30"
+                      step="1"
+                      value="10"
+                      inputmode="numeric"
+                    />
+                    <span class="input-suffix" aria-hidden="true">yr</span>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <button type="reset" class="btn btn--ghost btn--sm">Reset</button>
+          </form>
+
+          <!-- Result -->
+          <aside
+            class="result"
+            id="result"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-labelledby="result-heading"
+          >
+            <h2 id="result-heading" class="sr-only">Result</h2>
+
+            <div class="result__card">
+              <p class="result__eyebrow">One missed class =</p>
+              <p class="result__big">
+                <span class="result__currency">$</span><span id="result-today">—</span>
+              </p>
+              <p class="result__caption">
+                <span id="result-school">your school</span>,
+                <span id="result-schedule">per session</span>.
+              </p>
+
+              <div class="result__loan" id="result-loan" hidden>
+                <div class="result__divider" role="presentation"></div>
+                <p class="result__loan-label">Real cost after loan interest</p>
+                <p class="result__loan-value">
+                  <span class="result__currency">$</span><span id="result-total">—</span>
+                </p>
+                <p class="result__caption" id="result-loan-sub">
+                  Assuming a 6.53% rate over 10 years.
+                </p>
+              </div>
+
+              <ul class="equivalences" id="equivalences" aria-label="What that money buys">
+                <!-- populated by JS -->
+              </ul>
+
+              <p class="result__footnote" id="result-footnote">
+                Now you know how much your nap cost. Make it a good one.
+              </p>
+
+              <div class="result__actions">
+                <button type="button" class="btn btn--primary" id="download-card">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Download share card
+                </button>
+                <button type="button" class="btn btn--secondary" id="copy-link">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.71"/>
+                  </svg>
+                  <span id="copy-link-label">Copy link</span>
+                </button>
+              </div>
+            </div>
+
+            <canvas id="card-canvas" width="1200" height="630" aria-hidden="true" hidden></canvas>
+          </aside>
+        </div>
+      </section>
+
+      <!-- FOOTER NOTE -->
+      <section class="note" aria-label="Support resources">
+        <div class="container">
+          <p>
+            Struggling to show up? That's bigger than money.
+            <a href="https://www.activeminds.org/about-mental-health/find-help/" target="_blank" rel="noopener">
+              Find campus-friendly mental health support →
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <!-- METHOD -->
+      <section class="method" aria-labelledby="method-heading">
+        <div class="container method__grid">
+          <div>
+            <h2 id="method-heading" class="section-title">How the math works</h2>
+            <p class="method__lede">
+              No trickery. Here's every number on the page, demystified.
+            </p>
+          </div>
+          <ol class="method__list">
+            <li>
+              <h3>Cost per class session</h3>
+              <p>
+                Tuition ÷ meetings per semester. For a flat-rate semester,
+                that's <code>tuition ÷ (meetings-per-week × weeks)</code>.
+                Per-credit-hour schools: we first convert to a class-level
+                cost using the credits you're taking.
+              </p>
+            </li>
+            <li>
+              <h3>Loan-adjusted cost</h3>
+              <p>
+                Standard amortization. If you borrowed this money at
+                <code>r</code>% over <code>n</code> years, you'll actually
+                pay <code>P × (r/12)(1+r/12)^(n×12) / ((1+r/12)^(n×12) − 1) × n × 12</code>
+                to retire it. We default to the 2025–26 federal
+                undergraduate rate (6.53%) and 10 years.
+              </p>
+            </li>
+            <li>
+              <h3>Equivalences</h3>
+              <p>
+                Rough national averages for a burrito, a concert ticket, and
+                a month of Spotify. They rotate. Not financial advice — just
+                context.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p class="site-footer__copy">
+          Built as a free utility. No tracking, no sign-up, no ads.
+        </p>
+        <p class="site-footer__links">
+          <a href="#calculator">Calculator</a>
+          <a href="#method">How it works</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="app.js" defer></script>
+  <script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  var scrollRaf=0;
+  function emitScroll(){
+    scrollRaf=0;
+    var x=window.scrollX||window.pageXOffset||0;
+    var y=window.scrollY||window.pageYOffset||0;
+    window.parent.postMessage({type:'INLINE_EDIT_SCROLL',scrollX:x,scrollY:y},'*');
+  }
+  window.addEventListener('scroll',function(){
+    if(scrollRaf)return;
+    scrollRaf=requestAnimationFrame(emitScroll);
+  },{passive:true,capture:true});
+  emitScroll();
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>
